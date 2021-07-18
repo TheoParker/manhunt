@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>xyz.cyto.compass</groupId>
+  <artifactId>compass</artifactId>
+  <version>1.0</version>
+  <name>compass</name>
+  <description>bruh</description>
+  <repositories>
+  	<repository>
+    	<id>papermc</id>
+    	<url>https://papermc.io/repo/repository/maven-public/</url>
+	</repository>
+  </repositories>
+  <dependencies>
+  	<dependency>
+	    <groupId>com.destroystokyo.paper</groupId>
+	    <artifactId>paper-api</artifactId>
+	    <version>1.16.1-R0.1-SNAPSHOT</version>
+	    <scope>provided</scope>
+	</dependency>
+  </dependencies>
+	<properties>
+    	<maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+  <build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.6</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>xyz.cyto.Main</mainClass>
+                    </manifest>
+                    <manifestEntries>
+                        <Class-Path>.</Class-Path>
+                    </manifestEntries>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+ 
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>2.4.3</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                    <configuration>
+                        <transformers>
+                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <manifestEntries>
+                                    <Main-Class>xyz.cyto.Main</Main-Class>
+                                    <Build-Number>2</Build-Number>
+                                </manifestEntries>
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+                <execution>
+                    <id>copy</id>
+                    <phase>package</phase>
+                    <configuration>
+                        <target>
+                            <echo>ANT TASK - copying files....</echo>
+                            <copy todir="C:\Users\t-man\OneDrive\Desktop\1.16.1\plugins" overwrite="true" flatten="true">
+                                <fileset dir="${basedir}" includes="*.bat" >
+                                    <include name="*.bat" />
+                                    <include name="ReadME.*" />
+                                    <include name="target/compass-1.0.jar" />
+                                </fileset>
+                            </copy>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+</project>

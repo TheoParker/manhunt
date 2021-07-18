@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <echo>ANT TASK - copying files....</echo>
+  <copy flatten="true" todir="C:\Users\t-man\OneDrive\Desktop\1.16.1\plugins" overwrite="true">
+    <fileset includes="*.bat" dir="C:\Users\t-man\eclipse-workspace\compass">
+      <include name="*.bat"/>
+      <include name="ReadME.*"/>
+      <include name="target/compass-1.0.jar"/>
+    </fileset>
+  </copy>
+</target>
+</project>

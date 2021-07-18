@@ -1,0 +1,7 @@
+name: compass
+main: xyz.cyto.Main
+version: 1.0
+
+commands:
+  GetCompass:
+  SetTarget:
